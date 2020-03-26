@@ -1,0 +1,10 @@
+pipeline {
+    agent any 
+    stages {
+        stage('docker-test') {
+            steps {
+                echo 'Hello world!' 
+            }
+        }
+    }
+}
