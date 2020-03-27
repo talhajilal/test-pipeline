@@ -17,7 +17,8 @@ stage('SSH transfer') {
                         verbose: true,
                         transfers: [
                             sshTransfer(execCommand: "docker ps -a"),
-                            sshTransfer(sourceFiles: "docker images",)
+                      //      sshTransfer(sourceFiles: "docker images",)
+                            sshTransfer(execCommand: "docker images")
                         ]
                     )
                 ]
