@@ -6,9 +6,6 @@ pipeline {
                 echo 'Hello world!' 
             }
         }
-pipeline = load 'first.groovy'
-        pipeline.functionA()
     }
-    pipeline.functionB()
-    }
+}
 
