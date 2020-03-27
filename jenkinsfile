@@ -5,7 +5,18 @@ pipeline {
             steps {
                 echo 'Hello world!' 
             }
+        steps {
+                echo 'Hello world!' 
+            }
         }
     }
+stages {
+    node {
+    def rootDir = pwd()
+    def example = load "${rootDir}@script/Example.Groovy "
+    example.exampleMethod()
+    example.otherExampleMethod()
+}
+}
 }
 
