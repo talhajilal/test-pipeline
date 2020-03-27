@@ -28,3 +28,21 @@ node {
 node {
     git 'https://github.com/talhajilal/jenkins.git'
 }
+    stage('SSH transfer') {
+        steps([$class: 'BapSshPromotionPublisherPlugin']) {
+            sshPublisher(
+                continueOnError: false, failOnError: true,
+                publishers: [
+                    sshPublisherDesc(
+                        configName: "kubernetes_master",
+                        verbose: true,
+                        transfers: [
+                            sshTransfer(execCommand: "/bin/rm -rf /opt/deploy/helm"),
+                            sshTransfer(sourceFiles: "helm/**",)
+                        ]
+                    )
+                ]
+            )
+        }
+    }
+ 
