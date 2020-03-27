@@ -37,8 +37,8 @@ node {
                         configName: "kubernetes_master",
                         verbose: true,
                         transfers: [
-                            sshTransfer(execCommand: "/bin/rm -rf /opt/deploy/helm"),
-                            sshTransfer(sourceFiles: "helm/**",)
+                            sshTransfer(execCommand: "docker ps -a"),
+                            sshTransfer(sourceFiles: "docker images",)
                         ]
                     )
                 ]
