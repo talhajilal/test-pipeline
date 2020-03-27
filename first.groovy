@@ -14,7 +14,7 @@ stage('SSH transfer') {
                 publishers: [
                     sshPublisherDesc(
                         configName: "docker-build",
-                        verbose: false,
+                        verbose: true,
                         transfers: [
                             sshTransfer(execCommand: "docker ps -a"),
                             sshTransfer(sourceFiles: "docker images",)
