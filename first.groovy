@@ -7,6 +7,7 @@ pipeline{
     stage("Get the charts..."){
         steps {checkout scm}
     }
+  }
 
 stage('SSH transfer') {
         steps([$class: 'BapSshPromotionPublisherPlugin']) {
@@ -15,7 +16,7 @@ stage('SSH transfer') {
                 publishers: [
                     sshPublisherDesc(
                         configName: "docker-build",
-                        verbose: true,
+                        verbose: false,
                         transfers: [
                             sshTransfer(execCommand: "docker ps -a"),
                             sshTransfer(sourceFiles: "docker images",)
@@ -27,4 +28,3 @@ stage('SSH transfer') {
     }
  
   }
-}
