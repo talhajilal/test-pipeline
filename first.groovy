@@ -7,3 +7,5 @@ pipeline{
     stage("Get the charts..."){
         steps {checkout scm}
     }
+  }
+}
