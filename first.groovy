@@ -5,9 +5,7 @@ node ('') {
   sh "echo 'Hello World'"
 }
 }
-node {
-  sh "ssh root@10.0.2.15 'docker images'"
-}
+
 node {
     git 'https://github.com/talhajilal/jenkins.git'
 }
@@ -22,9 +20,6 @@ node ('') {
   sh "echo 'Hello World'"
 }
 }
-//node {
-  //sh "ssh root@10.0.2.15 'docker images'"
-//}
 node {
     git 'https://github.com/talhajilal/jenkins.git'
 }
