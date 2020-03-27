@@ -7,8 +7,6 @@ pipeline{
     stage("Get the charts..."){
         steps {checkout scm}
     }
-  }
-
 stage('SSH transfer') {
         steps([$class: 'BapSshPromotionPublisherPlugin']) {
             sshPublisher(
@@ -28,3 +26,4 @@ stage('SSH transfer') {
     }
  
   }
+}
