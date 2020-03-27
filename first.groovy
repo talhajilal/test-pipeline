@@ -16,9 +16,10 @@ stage('SSH transfer') {
                         configName: "docker-build",
                         verbose: true,
                         transfers: [
-                            sshTransfer(execCommand: "docker ps -a"),
+                            sshTransfer(execCommand: "git clone -b master https://github.com/talhajilal/tomcat-1.git tomcat-1"),
                       //      sshTransfer(sourceFiles: "docker images",)
-                            sshTransfer(execCommand: "docker images")
+                            sshTransfer(execCommand: "docker build -t tomcat:1 tomcat-1/."),
+                            sshTransfer(execCommand: "docker images | grep tomcat")
                         ]
                     )
                 ]
