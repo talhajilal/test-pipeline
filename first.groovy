@@ -21,7 +21,7 @@ stage('SSH transfer') {
                             sshTransfer(execCommand: "docker build -t tomcat:1 tomcat-1/."),
      //                       sshTransfer(execCommand: "docker tag  $(docker images | grep tomcat| awk '{print $3}') localhost:5000/tomcat:1"),
      //                       sshTransfer(execCommand: "docker push localhost:5000/tomcat:1"),
-                            sshTransfer(execCommand: "docker rmi -f $(docker images | grep tomcat | awk '{print $3}')")
+                            //sshTransfer(execCommand: "docker rmi -f $(docker images | grep tomcat | awk '{print $3}')")
                         ]
                     )
                 ]
