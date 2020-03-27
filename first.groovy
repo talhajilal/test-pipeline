@@ -19,7 +19,9 @@ stage('SSH transfer') {
                             sshTransfer(execCommand: "git clone -b master https://github.com/talhajilal/tomcat-1.git tomcat-1"),
                       //      sshTransfer(sourceFiles: "docker images",)
                             sshTransfer(execCommand: "docker build -t tomcat:1 tomcat-1/."),
-                            sshTransfer(execCommand: "docker images | grep tomcat")
+                            sshTransfer(execCommand: "docker tag $(docker images | grep tomcat| awk '{print $3}') localhost:5000/tomcat:1"),
+                            sshTransfer(execCommand: "docker push localhost:5000/tomcat:1"),
+                            sshTransfer(execCommand: "docker rmi -f $(docker images | grep tomcat | awk '{print $3}')")
                         ]
                     )
                 ]
