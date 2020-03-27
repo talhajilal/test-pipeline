@@ -1,16 +1,18 @@
-// Scripted Pipeline
-node ('') {
-    stage('dev') {
-  // get code from our Git repository
-  sh "echo 'Hello World'"
-}
-}
-node {
-    stage('SSH transfer') {
-         steps([$class: 'BapSshPromotionPublisherPlugin']) {
-             sshPublisher(
-                 continueOnError: false, failOnError: true,
-                     publishers: [
+pipeline{
+  agent any
+  environment {
+    RELEASENAME="yourProject-ci"
+  }
+  stages{
+    stage("Get the charts..."){
+        steps {checkout scm}
+    }
+
+stage('SSH transfer') {
+        steps([$class: 'BapSshPromotionPublisherPlugin']) {
+            sshPublisher(
+                continueOnError: false, failOnError: true,
+                publishers: [
                     sshPublisherDesc(
                         configName: "docker-build",
                         verbose: true,
@@ -19,7 +21,10 @@ node {
                             sshTransfer(sourceFiles: "docker images",)
                         ]
                     )
-                     ]
-         }
+                ]
+            )
+        }
     }
+ 
+  }
 }
