@@ -1,22 +1,18 @@
-pipeline {
-    agent any 
-    stages {
-        stage('docker-test') {
-            steps {
-                echo 'Hello world!' 
-            }
-        steps {
-                echo 'Hello world!' 
-            }
-        }
-    }
-stages {
-    node {
+node {
+    // Git checkout before load source the file
+    checkout scm
+
+    // To know files are checked out or not
+    sh '''
+        ls -lhrt
+    '''
+
     def rootDir = pwd()
-    def example = load "${rootDir}@script/Example.Groovy "
+    println("Current Directory: " + rootDir)
+
+    // point to exact source file
+    def example = load "${rootDir}/first.groovy"
+
     example.exampleMethod()
     example.otherExampleMethod()
 }
-}
-}
-
