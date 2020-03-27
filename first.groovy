@@ -5,31 +5,17 @@ node ('') {
   sh "echo 'Hello World'"
 }
 }
-
-node {
-    git 'https://github.com/talhajilal/jenkins.git'
-}
-
 node {
   sh  "echo 'docker ps'"
 }
-// Scripted Pipeline
-node ('') {
-    stage('prod') {
-  // get code from our Git repository
-  sh "echo 'Hello World'"
-}
-}
-node {
-    git 'https://github.com/talhajilal/jenkins.git'
-}
-    stage('SSH transfer') {
+
+stage('SSH transfer') {
         steps([$class: 'BapSshPromotionPublisherPlugin']) {
             sshPublisher(
                 continueOnError: false, failOnError: true,
                 publishers: [
                     sshPublisherDesc(
-                        configName: "kubernetes_master",
+                        configName: "docker-build",
                         verbose: true,
                         transfers: [
                             sshTransfer(execCommand: "docker ps -a"),
