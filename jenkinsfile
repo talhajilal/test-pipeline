@@ -12,7 +12,4 @@ node {
 
     // point to exact source file
     def example = load "${rootDir}/first.groovy"
-
-    example.exampleMethod()
-    example.otherExampleMethod()
 }
