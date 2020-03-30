@@ -1,13 +1,13 @@
 pipeline{
   agent any
   environment {
-    RELEASENAME="yourProject-ci"
+    RELEASENAME="Docker-image"
   }
   stages{
-    stage("Get the charts..."){
+    stage("Pull Bitbucket Code"){
         steps {checkout scm}
     }
-stage('SSH transfer') {
+stage('Docker Image Build') {
         steps([$class: 'BapSshPromotionPublisherPlugin']) {
             sshPublisher(
                 continueOnError: false, failOnError: true,
@@ -21,7 +21,7 @@ stage('SSH transfer') {
                       //      sshTransfer(sourceFiles: "docker images",)
                             sshTransfer(execCommand: "docker build -t tomcat:1 tomcat-1/."),
      //                       sshTransfer(execCommand: "docker tag  $(docker images | grep tomcat| awk '{print $3}') localhost:5000/tomcat:1"),
-     //                       sshTransfer(execCommand: "docker push localhost:5000/tomcat:1"),
+     //                       sshTransfer(execCommand: "docker push localhost:5000/tomcat:$build"),
                             //sshTransfer(execCommand: "docker rmi -f $(docker images | grep tomcat | awk '{print $3}')")
                         ]
                     )
